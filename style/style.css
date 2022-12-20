@@ -98,10 +98,6 @@ ul {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 }
 @media (max-width: 1000px) {
   .landing::before {
@@ -171,11 +167,6 @@ ul {
     position: relative;
   }
   .landing .nav .container .logo {
-    /* position: absolute;
-    top: -38px;
-    left: 3%;
-    font-size: 30px;
-    background-color: #3b3934; */
     display: none;
   }
 }

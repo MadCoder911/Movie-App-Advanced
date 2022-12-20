@@ -22,17 +22,20 @@ playIcon.addEventListener("mouseout", (e) => {
   nav.style.filter = "blur(0px)";
 });
 
+let widthWin = window.innerWidth;
+console.log(widthWin);
 let randommovie = Math.trunc(Math.random() * 20);
 
 const getMovies = async function (url) {
   const res = await fetch(url);
   const data = await res.json();
   // Landing image
-  if (window.innerWidth <= 700) {
+  if (widthWin <= 700) {
+    console.log(true);
     landing.style.backgroundImage = `url('${
       IMG_PATH + data.results[randommovie].poster_path
     }')`;
-  } else {
+  } else if (widthWin > 700) {
     landing.style.backgroundImage = `url('${
       IMG_PATH + data.results[randommovie].backdrop_path
     }')`;
