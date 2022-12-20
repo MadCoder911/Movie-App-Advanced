@@ -80,11 +80,19 @@ ul {
 .landing {
   position: relative;
   height: 100vh;
-
   background-size: cover;
   background-attachment: fixed;
   z-index: 0;
   filter: blur(0px);
+  background-size: contain !important;
+  background-repeat: repeat !important;
+}
+@media (max-width: 700px) {
+  .landing {
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+  }
 }
 .landing::before {
   content: "";
@@ -102,7 +110,6 @@ ul {
 @media (max-width: 1000px) {
   .landing::before {
     background-position: center;
-    background-repeat: no-repeat;
   }
 }
 .landing .nav {
