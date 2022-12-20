@@ -85,7 +85,7 @@ ul {
   z-index: 0;
   filter: blur(0px);
   background-size: contain !important;
-  background-repeat: repeat !important;
+  background-repeat: no-repeat;
 }
 @media (max-width: 700px) {
   .landing {
