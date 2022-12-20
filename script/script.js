@@ -28,16 +28,21 @@ const getMovies = async function (url) {
   const res = await fetch(url);
   const data = await res.json();
   // Landing image
-  landing.style.backgroundImage = `url('${
-    IMG_PATH + data.results[randommovie].backdrop_path
-  }')`;
+  if (window.innerWidth <= 700) {
+    landing.style.backgroundImage = `url('${
+      IMG_PATH + data.results[randommovie].poster_path
+    }')`;
+  } else {
+    landing.style.backgroundImage = `url('${
+      IMG_PATH + data.results[randommovie].backdrop_path
+    }')`;
+  }
   //   H1 title
   landingTitle.innerHTML = `${data.results[randommovie].title}`;
   // Overview
   landingP.innerHTML = `${data.results[randommovie].overview}`;
   //   Ratings
   ratings.innerHTML = `Ratings: ${data.results[randommovie].vote_average}`;
-  console.log(data.results[0]);
 };
 getMovies(API_URL);
 
@@ -68,7 +73,7 @@ closemenu.addEventListener("click", function () {
 /////////////////////////////////////////////////
 // Top movies Data
 const genres = {
-  28: "action",
+  28: "Action",
   12: "Adventure",
   16: "Animation",
   35: "Comedy",
@@ -111,11 +116,16 @@ const topMovies = async function (url) {
     console.log(data);
     let html = `
     <div class="box">
-    <img src="${IMG_PATH + data.backdrop_path}" alt="" />
+    
+    <img src="${IMG_PATH + data.poster_path}" alt="" />
     <div class="genre">${checkGenre(data.genre_ids[0])}</div>
     <div class="bottom-content">
       <div class="rating">Rating: ${data.vote_average}</div>
       <div class="title">${data.title}</div>
+      <svg xmlns="http://www.w3.org/2000/svg" class="small-circle" width="50" height="50" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+</svg>
     </div>
   </div>
     `;
