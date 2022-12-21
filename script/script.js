@@ -23,7 +23,7 @@ playIcon.addEventListener("mouseout", (e) => {
 });
 
 let widthWin = window.innerWidth;
-console.log(widthWin);
+
 let randommovie = Math.trunc(Math.random() * 20);
 
 const getMovies = async function (url) {
@@ -31,7 +31,6 @@ const getMovies = async function (url) {
   const data = await res.json();
   // Landing image
   if (widthWin <= 700) {
-    console.log(true);
     landing.style.backgroundImage = `url('${
       IMG_PATH + data.results[randommovie].poster_path
     }')`;
@@ -116,7 +115,6 @@ const topMovies = async function (url) {
   const data = await res.json();
 
   data.results.forEach((data) => {
-    console.log(data);
     let html = `
     <div class="box">
     
@@ -137,3 +135,19 @@ const topMovies = async function (url) {
   loadingSpinner.classList.add("hide");
 };
 topMovies(API_URL);
+//
+const search = document.querySelector(".searchfield");
+const searchBtn = document.querySelector(".searchBtn");
+const form = document.getElementById("form");
+searchBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const searchTerm = search.value;
+  console.log(searchTerm);
+  if (searchTerm && searchTerm !== "") {
+    moviesContainer.innerHTML = "";
+    topMovies(SEARCH_API + searchTerm);
+    search.value = "";
+  } else {
+    window.location.reload();
+  }
+});
