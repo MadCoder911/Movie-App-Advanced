@@ -137,7 +137,7 @@ ul {
     background-color: #3b3934;
     width: 100%;
     position: absolute;
-    top: 243px;
+    top: 235px;
     z-index: 100000;
   }
   .menu_hidden {
@@ -197,6 +197,12 @@ ul {
   padding: 10px 20px;
   cursor: pointer;
 }
+.landing .nav .container .user-info .two a {
+  color: white;
+}
+.landing .nav .container .user-info .two a:hover {
+  color: var(--main-color);
+}
 @media (max-width: 1000px) {
   .landing .nav .container .user-info {
     margin: 0;
@@ -224,9 +230,7 @@ ul {
     margin-right: 10px;
   }
 }
-.landing .nav .container .user-info .user:hover {
-  color: var(--main-color);
-}
+
 .landing .nav .container .user p {
   padding-left: 10px;
 }

@@ -1,0 +1,55 @@
+.landing .login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #3b3934e3;
+  width: 29%;
+  color: white;
+  border-radius: 5px;
+}
+@media (max-width: 1000px) {
+  .landing .login {
+    width: 90%;
+  }
+}
+.login h1 {
+  text-align: center;
+  padding-top: 50px;
+}
+.landing .login .form {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+.landing .login .form input {
+  width: 100%;
+  border: 0;
+  background-color: transparent;
+  padding: 13px 0px;
+  border-bottom: 1px solid white;
+  color: white;
+}
+.landing .login .form input:focus {
+  outline: none;
+}
+.landing .login .form label {
+  transform: translateY(30px);
+  transition: transform 0.5s ease;
+  z-index: -11;
+}
+.active {
+  transform: translateY(0px) !important;
+}
+.landing .login button {
+  margin-top: 50px;
+  padding: 15px 0px;
+  background-color: var(--main-color);
+  border: 0vmax;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.landing .login button:hover {
+  background-color: #c7a006;
+}

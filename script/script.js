@@ -1,11 +1,6 @@
 "use strict";
-const API_URL =
-  "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=dc932664ec2a138c87133ad2a308b1bd&page=1";
-const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
-const SEARCH_API =
-  'https://api.themoviedb.org/3/search/movie?api_key=dc932664ec2a138c87133ad2a308b1bd&query="';
-
-const landing = document.querySelector(".landing");
+import { API_URL, SEARCH_API, IMG_PATH } from "./config.js";
+export const landing = document.querySelector(".landing");
 const landingTitle = document.querySelector(".landingtitle");
 const landingP = document.querySelector(".landingP");
 const ratings = document.querySelector(".ratings");
@@ -13,18 +8,20 @@ const content = document.querySelector(".content");
 const rightContent = document.querySelector(".right-content");
 const playIcon = document.querySelector(".circle");
 const nav = document.querySelector(".nav");
-playIcon.addEventListener("mouseover", (e) => {
-  rightContent.style.filter = "blur(3px)";
-  nav.style.filter = "blur(3px)";
-});
-playIcon.addEventListener("mouseout", (e) => {
-  rightContent.style.filter = "blur(0px)";
-  nav.style.filter = "blur(0px)";
+(function () {
+  playIcon.addEventListener("mouseover", (e) => {
+    rightContent.style.filter = "blur(3px)";
+    nav.style.filter = "blur(3px)";
+  });
+  playIcon.addEventListener("mouseout", (e) => {
+    rightContent.style.filter = "blur(0px)";
+    nav.style.filter = "blur(0px)";
+  });
 });
 
-let widthWin = window.innerWidth;
+export let widthWin = window.innerWidth;
 
-let randommovie = Math.trunc(Math.random() * 20);
+export let randommovie = Math.trunc(Math.random() * 20);
 
 const getMovies = async function (url) {
   const res = await fetch(url);
@@ -89,7 +86,7 @@ const genres = {
   10402: " Music",
   9648: "Mystery",
   10749: "Romance",
-  878: "ScienceFiction",
+  878: "Science fiction",
   10770: "TVMovie",
   53: "Thriller",
   10752: "War",
@@ -138,16 +135,26 @@ topMovies(API_URL);
 //
 const search = document.querySelector(".searchfield");
 const searchBtn = document.querySelector(".searchBtn");
-const form = document.getElementById("form");
-searchBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  const searchTerm = search.value;
-  console.log(searchTerm);
-  if (searchTerm && searchTerm !== "") {
-    moviesContainer.innerHTML = "";
-    topMovies(SEARCH_API + searchTerm);
-    search.value = "";
-  } else {
-    window.location.reload();
-  }
+
+(function () {
+  searchBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const searchTerm = search.value;
+    console.log(searchTerm);
+    if (searchTerm && searchTerm !== "") {
+      moviesContainer.innerHTML = "";
+      topMovies(SEARCH_API + searchTerm);
+      search.value = "";
+    } else {
+      window.location.reload();
+    }
+  });
 });
+/* Logging in */
+const loginName = document.querySelector(".Username");
+
+export const setUsername = function (username) {
+  loginName.innerHTML = `Welcome, ${
+    username.charAt(0).toUpperCase() + username.slice(1)
+  }`;
+};
