@@ -136,20 +136,19 @@ topMovies(API_URL);
 const search = document.querySelector(".searchfield");
 const searchBtn = document.querySelector(".searchBtn");
 
-(function () {
-  searchBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    const searchTerm = search.value;
-    console.log(searchTerm);
-    if (searchTerm && searchTerm !== "") {
-      moviesContainer.innerHTML = "";
-      topMovies(SEARCH_API + searchTerm);
-      search.value = "";
-    } else {
-      window.location.reload();
-    }
-  });
+searchBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const searchTerm = search.value;
+  console.log(searchTerm);
+  if (searchTerm && searchTerm !== "") {
+    moviesContainer.innerHTML = "";
+    topMovies(SEARCH_API + searchTerm);
+    search.value = "";
+  } else {
+    window.location.reload();
+  }
 });
+
 /* Logging in */
 const loginName = document.querySelector(".Username");
 
