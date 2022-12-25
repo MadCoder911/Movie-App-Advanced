@@ -153,8 +153,17 @@ const searchBtn = document.querySelector(".searchBtn");
 /* Logging in */
 const loginName = document.querySelector(".Username");
 
-export const setUsername = function (username) {
+const setUsername = function (username) {
   loginName.innerHTML = `Welcome, ${
     username.charAt(0).toUpperCase() + username.slice(1)
   }`;
 };
+let data = JSON.parse(localStorage.getItem("userInfo"));
+const checkUser = function () {
+  if (!data) {
+    return;
+  } else {
+    setUsername(data[0].user);
+  }
+};
+checkUser();
