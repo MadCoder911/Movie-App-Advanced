@@ -7,6 +7,7 @@ const passwordLabel = document.querySelector(".password");
 const passwordInput = document.querySelector(".passwordinputt");
 const loginBtn = document.querySelector(".loginBtn");
 const landing = document.querySelector(".landing");
+
 usernameInput.addEventListener("click", function () {
   usernameLabel.classList.add("active");
 });

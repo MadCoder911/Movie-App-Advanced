@@ -80,13 +80,13 @@ ul {
 .landing {
   position: relative;
   height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
   z-index: 0;
   filter: blur(0px);
 }
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
   .landing {
     background-size: cover !important;
     background-position: center !important;
