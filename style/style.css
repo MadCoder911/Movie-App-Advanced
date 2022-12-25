@@ -81,11 +81,10 @@ ul {
   position: relative;
   height: 100vh;
   background-size: cover;
+  background-position: center;
   background-attachment: fixed;
   z-index: 0;
   filter: blur(0px);
-  background-size: contain !important;
-  background-repeat: no-repeat;
 }
 @media (max-width: 700px) {
   .landing {
