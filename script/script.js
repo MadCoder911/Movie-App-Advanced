@@ -157,12 +157,24 @@ const setUsername = function (username) {
     username.charAt(0).toUpperCase() + username.slice(1)
   }`;
 };
-let data = JSON.parse(localStorage.getItem("userInfo"));
+let data = JSON.parse(localStorage.getItem("loggedAcc"));
+let loginstatus = JSON.parse(localStorage.getItem("logStatus"));
 const checkUser = function () {
-  if (!data) {
+  if (!data || loginstatus === "false") {
     return;
   } else {
-    setUsername(data[0].user);
+    setUsername(data.user);
   }
 };
 checkUser();
+
+const profilePage = function () {
+  loginName.addEventListener("click", () => {
+    if (loginstatus === "false") {
+      window.location.href = "login.html";
+    } else if (loginstatus === "true" || !loginstatus) {
+      window.location.href = "profile.html";
+    }
+  });
+};
+profilePage();
