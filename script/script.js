@@ -170,9 +170,9 @@ checkUser();
 
 const profilePage = function () {
   loginName.addEventListener("click", () => {
-    if (loginstatus === "false") {
+    if (loginstatus === "false" || !loginstatus) {
       window.location.href = "login.html";
-    } else if (loginstatus === "true" || !loginstatus) {
+    } else if (loginstatus === "true") {
       window.location.href = "profile.html";
     }
   });
