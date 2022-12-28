@@ -12,7 +12,7 @@
     <!-- Style Sheet -->
     <link rel="stylesheet" href="style/style.css" />
     <!-- Login Stylesheet -->
-<!-- Stylesheet hereeee for profile -->
+    <link rel="stylesheet" href="style/profile.css" />
   </head>
   <body>
     <div class="landing">
@@ -78,8 +78,46 @@
           </div>
         </div>
       </div>
-     <h1 style="color: white;" >Profile Page is under construction !!!!!!</h1>
-     <button class="logout">Logout</button>
-     <script src="script/profile.js"></script>
+      <div class="profile">
+        <div class="info">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100"
+            height="100"
+            fill="currentColor"
+            class="bi bi-person"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"
+            />
+          </svg>
+          <div class="user-name">Ahmed</div>
+        </div>
+        <div class="boxes">
+          <div class="box">
+            <p class="number">50</p>
+            <p class="title">Likes</p>
+          </div>
+          <div class="box">
+            <p class="number">200</p>
+            <p class="title">Followers</p>
+          </div>
+          <div class="box">
+            <p class="number">136</p>
+            <p class="title">Following</p>
+          </div>
+          <div class="box">
+            <p class="number fav-mov">0</p>
+            <p class="title">Bookmarked Movies</p>
+          </div>
+        </div>
+        <div class="logout">
+          <button class="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="script/profile.js"></script>
   </body>
 </html>

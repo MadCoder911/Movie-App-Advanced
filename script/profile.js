@@ -1,7 +1,31 @@
+import { API_URL, IMG_PATH } from "./config.js";
+const landing = document.querySelector(".landing");
 const burgerIcon = document.getElementById("menuu");
 const mobileMenu = document.querySelector(".mobile_menu");
-
 const closemenu = document.querySelector(".close-menu");
+////
+////
+////
+let widthWin = window.innerWidth;
+
+let randommovie = Math.trunc(Math.random() * 20);
+const getMoviess = async function (url) {
+  const res = await fetch(url);
+  const data = await res.json();
+  // Landing image
+  if (widthWin <= 700) {
+    landing.style.backgroundImage = `url('${
+      IMG_PATH + data.results[randommovie].poster_path
+    }')`;
+  } else if (widthWin > 700) {
+    landing.style.backgroundImage = `url('${
+      IMG_PATH + data.results[randommovie].backdrop_path
+    }')`;
+  }
+};
+getMoviess(API_URL);
+////
+//
 burgerIcon.addEventListener("click", function (e) {
   e.preventDefault();
 

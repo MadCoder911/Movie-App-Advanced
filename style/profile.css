@@ -1,0 +1,96 @@
+.landing {
+  height: 1000px;
+}
+.landing .profile {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #3b3934e3;
+  width: 80%;
+  color: white;
+  border-radius: 5px;
+  justify-content: center;
+}
+@media (max-width: 1000px) {
+  .landing .profile {
+    width: 95%;
+  }
+}
+.landing .profile .info {
+  padding: 20px;
+  text-align: center;
+}
+.landing .profile .info svg {
+  border: 4px solid #c7a006;
+  padding: 10px;
+  border-radius: 50%;
+}
+.landing .profile .info .user-name {
+  font-size: 50px;
+  font-weight: bold;
+  color: #c7a006;
+}
+.landing .profile .boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.landing .profile .boxes .box {
+  width: 180px;
+  height: 120px;
+  padding: 20px 20px;
+  margin: 20px;
+  background-color: #c7a006;
+  border-radius: 5px;
+  text-align: center;
+}
+@media (max-width: 1000px) {
+  .landing .profile .boxes .box {
+    width: 130px;
+    height: 100px;
+    padding: 20px 20px;
+    margin: 20px;
+    background-color: #c7a006;
+    border-radius: 5px;
+    text-align: center;
+  }
+}
+.landing .profile .boxes .box .title {
+  font-weight: bolder;
+  margin: 0;
+  font-size: 23px;
+}
+@media (max-width: 1000px) {
+  .landing .profile .boxes .box .title {
+    font-size: 15px;
+  }
+}
+.landing .profile .boxes .box .number {
+  color: gainsboro;
+  font-weight: bold;
+  font-style: italic;
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.landing .profile .logout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.landing .profile button {
+  margin-top: 0px;
+  margin-bottom: 30px;
+  padding: 15px 100px;
+  background-color: var(--main-color);
+  border: 0vmax;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  width: fit-content;
+}
+.landing .profile button:hover {
+  background-color: #c7a006;
+}
