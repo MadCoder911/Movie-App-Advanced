@@ -438,6 +438,12 @@ ul {
   display: flex;
   flex-wrap: wrap;
 }
+@media (max-width: 1000px) {
+  .footer {
+    display: block;
+    width: 100%;
+  }
+}
 .footer .left-side {
   flex: 0.7;
   color: white;
@@ -448,6 +454,7 @@ ul {
 @media (max-width: 1000px) {
   .footer .left-side {
     flex: 1;
+    width: 100%;
     padding: 20px 0px 50px 50px;
   }
 }
@@ -535,7 +542,7 @@ ul {
     width: 100%;
     font-size: 18px;
     margin-top: 0;
-    margin-left: 20px;
+    margin-left: 0px;
     align-items: center;
     justify-content: space-between;
     color: white;
