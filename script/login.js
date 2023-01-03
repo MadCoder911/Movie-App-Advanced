@@ -108,6 +108,8 @@ registerBtn.addEventListener("click", () => {
   loginBtn.classList.add("hidden");
   registerbtn.classList.remove("hidden");
   registerFunctionality();
+  usernameInput.value = "";
+  passwordInput.value = "";
 });
 
 const registerFunctionality = function () {

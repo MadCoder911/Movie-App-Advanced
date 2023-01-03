@@ -84,3 +84,14 @@ logoutBtn.addEventListener("click", () => {
   localStorage.removeItem("loggedAcc");
   window.location.href = "index.html";
 });
+
+// Display Username
+const profileUsername = document.querySelector(".user-name");
+const displayUsername = function () {
+  let loggedUser = JSON.parse(localStorage.getItem("loggedAcc"));
+  console.log(loggedUser);
+  profileUsername.innerHTML = `${
+    loggedUser.user.charAt(0).toUpperCase() + loggedUser.user.slice(1)
+  }`;
+};
+displayUsername();

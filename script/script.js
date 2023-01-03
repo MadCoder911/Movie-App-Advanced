@@ -26,6 +26,7 @@ export let randommovie = Math.trunc(Math.random() * 20);
 const getMovies = async function (url) {
   const res = await fetch(url);
   const data = await res.json();
+  console.log(data);
   // Landing image
   if (widthWin <= 700) {
     landing.style.backgroundImage = `url('${
