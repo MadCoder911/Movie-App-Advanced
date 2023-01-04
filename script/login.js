@@ -130,7 +130,7 @@ const registerFunctionality = function () {
     } else {
       correctPassText.classList.remove("hidden");
     }
-    let user = { user: username, pass: password };
+    let user = { user: username, pass: password, bookmarks: [] };
     accounts.push(user);
     localStorage.setItem("Accounts", JSON.stringify(accounts));
     usernameInput.value = "";

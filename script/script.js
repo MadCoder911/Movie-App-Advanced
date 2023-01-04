@@ -27,7 +27,6 @@ export let randommovie = Math.trunc(Math.random() * 20);
 const getMovies = async function (url) {
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data);
   // Landing image
   if (widthWin <= 700) {
     landing.style.backgroundImage = `url('${
@@ -119,7 +118,7 @@ const topMovies = async function (url) {
     
     <img src="${IMG_PATH + data.poster_path}" alt="" />
     <div class="genre">${checkGenre(data.genre_ids[0])}</div>
-   <div class="bookmark"><i class="fa-regular fa-bookmark"></i></div>
+   <div class="bookmarkinitial bii"><i class="fa-regular fa-bookmark"></i></div>
    
     <div class="bottom-content">
       <div class="rating">Rating: ${data.vote_average}</div>
@@ -194,7 +193,7 @@ const checkBookmarkStatus = function (bookmark) {
   }
 };
 setTimeout(function () {
-  const bookmarkIcon = document.querySelectorAll(".bookmark");
+  const bookmarkIcon = document.querySelectorAll(".bii");
   const err = document.querySelector(".err");
   const checkBookmark = function () {
     if (loginstatus === "false" || !loginstatus) {
@@ -220,31 +219,54 @@ setTimeout(function () {
             rating: rating,
             bookmarkedMovie: name,
             title: name,
+            image: imgg,
           };
           let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
-          addBookmarkToAcc(movieData, imgg);
+          currentAcc.bookmarks.push(movieData);
+          localStorage.setItem("loggedAcc", JSON.stringify(currentAcc));
+          loadBookmarks();
+          checkBookmarksLength();
         });
       });
     }
   };
   checkBookmark();
 }, 1000);
-
-const bookmarkedContainer = document.querySelector(".bookmarkedBoxes");
-const bookmarkedParentContainer = document.querySelector(".bookmarkedd");
 const emptyBookTitle = document.querySelector(".h2");
-const addBookmarkToAcc = function (moviedat, y) {
-  emptyBookTitle.classList.add("hide");
-  console.log(moviedat.genre);
-  let html = `
-    <div class="box">
-    <img src="${y}" alt="" />
-    <div class="genre">${moviedat.genre}</div>
-   <div class="bookmark"><i class="fa-solid fa-bookmark"></i></div>
-   
+const bookmarkedContainer = document.querySelector(".bookmarkedBoxes");
+
+const checkBookmarksLength = function () {
+  if (bookmarkedContainer.children.length > 0) {
+    emptyBookTitle.classList.add("hide");
+  }
+};
+// remove
+////////////////////
+const removeBookmark = function (bookmark) {
+  bookmark.forEach((b) => {
+    b.addEventListener("click", () => {
+      let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
+      let moviename = b.children[3].children[1].innerHTML;
+      let index = currentAcc.bookmark.findIndex();
+      console.log(index);
+    });
+  });
+};
+
+//load
+const loadBookmarks = function () {
+  bookmarkedContainer.innerHTML = "";
+  let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
+  console.log(currentAcc.bookmarks);
+  currentAcc.bookmarks.forEach((bm) => {
+    let html = `
+    <div class="box bookmarked">
+    <img src="${bm.image}" alt="" />
+    <div class="genre">${bm.genre}</div>
+   <div class="bookmarkinitial ed"><i class="fa-solid fa-bookmark"></i></div>
     <div class="bottom-content">
-      <div class="rating">Rating: ${moviedat.rating}</div>
-      <div class="title">${moviedat.title}</div>
+      <div class="rating">Rating: ${bm.rating}</div>
+      <div class="title">${bm.title}</div>
       <svg xmlns="http://www.w3.org/2000/svg" class="small-circle" width="50" height="50" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
   <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
@@ -252,5 +274,10 @@ const addBookmarkToAcc = function (moviedat, y) {
     </div>
   </div>
     `;
-  bookmarkedContainer.innerHTML += html;
+    bookmarkedContainer.innerHTML += html;
+  });
+  const bookmarkeddd = document.querySelectorAll(".bookmarked");
+  removeBookmark(bookmarkeddd);
 };
+loadBookmarks();
+checkBookmarksLength();

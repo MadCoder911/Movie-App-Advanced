@@ -372,7 +372,7 @@ ul {
   font-size: 40px;
   width: 100%;
   text-align: center;
-  color: var(--main-color);
+  color: rgba(130, 130, 130, 0.763);
   margin-bottom: 100px;
   margin-top: 200px;
 }
@@ -430,7 +430,7 @@ ul {
   color: #3b3934;
   left: 15px;
 }
-.movies .container .boxes .box .bookmark {
+.movies .container .boxes .box .bookmarkinitial {
   position: absolute;
   padding: 4px 8px;
   font-size: 20px;
@@ -443,10 +443,10 @@ ul {
   cursor: pointer;
   transition: scale 0.2s ease;
 }
-.movies .container .boxes .box .bookmark:hover {
+.movies .container .boxes .box .bookmarkinitial:hover {
   scale: 1.2;
 }
-.movies .container .boxes .box:hover .bookmark {
+.movies .container .boxes .box:hover .bookmarkinitial {
   display: block;
 }
 .small-circle {
