@@ -364,8 +364,17 @@ ul {
 }
 .movies .container .boxes {
   display: grid;
+  position: relative;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 40px;
+}
+.movies .container .h2 {
+  font-size: 40px;
+  width: 100%;
+  text-align: center;
+  color: var(--main-color);
+  margin-bottom: 100px;
+  margin-top: 200px;
 }
 @media (max-width: 760px) {
   .movies .container .boxes {
@@ -393,7 +402,8 @@ ul {
   bottom: 0;
   transform: translateY(200px);
   width: 100%;
-  background-color: #fed530c0;
+  background-color: #fed530;
+  color: #1d1c1a;
   transition: transform 0.5s ease;
 }
 .movies .container .boxes .box:hover .bottom-content {
@@ -420,6 +430,25 @@ ul {
   color: #3b3934;
   left: 15px;
 }
+.movies .container .boxes .box .bookmark {
+  position: absolute;
+  padding: 4px 8px;
+  font-size: 20px;
+  border-radius: 3px;
+  top: 20px;
+  font-weight: bolder;
+  background-color: var(--main-color);
+  color: #3b3934;
+  right: 15px;
+  cursor: pointer;
+  transition: scale 0.2s ease;
+}
+.movies .container .boxes .box .bookmark:hover {
+  scale: 1.2;
+}
+.movies .container .boxes .box:hover .bookmark {
+  display: block;
+}
 .small-circle {
   position: absolute;
   right: -10px;
@@ -430,8 +459,25 @@ ul {
 .movies .container .boxes .box:hover .small-circle {
   display: block;
 }
-.movies .container .boxes .box:hover img {
-  filter: blur(2px);
+.err {
+  position: fixed;
+  z-index: 1000;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--main-color);
+  color: #1d1c1a;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transform: translateY(100px);
+  transition: transform 0.5s ease;
+}
+.show {
+  transform: translateY(0px);
 }
 /* Footer */
 .footer {

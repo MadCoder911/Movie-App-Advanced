@@ -8,6 +8,10 @@
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="style/normalize.css" />
     <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/0c45307f92.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="style/fontawesome.css" />
     <!-- Style Sheet -->
     <link rel="stylesheet" href="style/style.css" />
@@ -100,7 +104,20 @@
           <button class="searchBtn">Search</button>
         </form>
         <div class="loader"></div>
-        <div class="boxes"></div>
+        <div class="boxes">
+          <div class="err">
+            <h2>You need to be logged in in order to bookmark a movie</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <!-- Bookmarked Movies -->
+    <div class="movies bookmarkedd" id="">
+      <div class="container">
+        <h1>Bookmarked Movies</h1>
+        <h2 class="h2">Your bookmarks is empty !</h2>
+        <div class="boxes bookmarkedBoxes"></div>
       </div>
     </div>
     <!-- Footer -->

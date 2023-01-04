@@ -1,5 +1,6 @@
 /* Start Login page */
 import { API_URL, IMG_PATH } from "./config.js";
+export let accounts = [];
 
 const usernameLabel = document.querySelector(".username");
 const usernameInput = document.querySelector(".usernameinputt");
@@ -14,7 +15,6 @@ const landing = document.querySelector(".landing");
 const wrongPassText = document.querySelector(".wrong-pass");
 const correctPassText = document.querySelector(".correct-pass");
 const warningText = document.querySelector(".login-warning");
-let accounts = [];
 let login = false;
 /////
 /////

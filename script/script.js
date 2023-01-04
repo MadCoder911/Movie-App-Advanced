@@ -1,5 +1,6 @@
 "use strict";
 import { API_URL, SEARCH_API, IMG_PATH } from "./config.js";
+
 export const landing = document.querySelector(".landing");
 const landingTitle = document.querySelector(".landingtitle");
 const landingP = document.querySelector(".landingP");
@@ -118,6 +119,8 @@ const topMovies = async function (url) {
     
     <img src="${IMG_PATH + data.poster_path}" alt="" />
     <div class="genre">${checkGenre(data.genre_ids[0])}</div>
+   <div class="bookmark"><i class="fa-regular fa-bookmark"></i></div>
+   
     <div class="bottom-content">
       <div class="rating">Rating: ${data.vote_average}</div>
       <div class="title">${data.title}</div>
@@ -179,3 +182,75 @@ const profilePage = function () {
   });
 };
 profilePage();
+// Bookmarking
+
+const checkBookmarkStatus = function (bookmark) {
+  if (bookmark.firstChild.classList.contains("fa-regular")) {
+    bookmark.firstChild.classList.add("fa-solid");
+    bookmark.firstChild.classList.remove("fa-regular");
+  } else if (bookmark.firstChild.classList.contains("fa-solid")) {
+    bookmark.firstChild.classList.remove("fa-solid");
+    bookmark.firstChild.classList.add("fa-regular");
+  }
+};
+setTimeout(function () {
+  const bookmarkIcon = document.querySelectorAll(".bookmark");
+  const err = document.querySelector(".err");
+  const checkBookmark = function () {
+    if (loginstatus === "false" || !loginstatus) {
+      bookmarkIcon.forEach((bookmark) => {
+        bookmark.addEventListener("click", (e) => {
+          err.classList.add("show");
+          setTimeout(function () {
+            err.classList.remove("show");
+          }, 3000);
+        });
+      });
+    } else if (loginstatus === "true") {
+      bookmarkIcon.forEach((bookmark) => {
+        bookmark.addEventListener("click", (e) => {
+          checkBookmarkStatus(bookmark);
+          let box = e.target.closest(".box");
+          let imgg = box.children[0].src;
+          let genre = box.children[1].innerHTML;
+          let rating = box.children[3].children[0].innerHTML;
+          let name = box.children[3].children[1].innerHTML;
+          const movieData = {
+            genre: genre,
+            rating: rating,
+            bookmarkedMovie: name,
+            title: name,
+          };
+          let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
+          addBookmarkToAcc(movieData, imgg);
+        });
+      });
+    }
+  };
+  checkBookmark();
+}, 1000);
+
+const bookmarkedContainer = document.querySelector(".bookmarkedBoxes");
+const bookmarkedParentContainer = document.querySelector(".bookmarkedd");
+const emptyBookTitle = document.querySelector(".h2");
+const addBookmarkToAcc = function (moviedat, y) {
+  emptyBookTitle.classList.add("hide");
+  console.log(moviedat.genre);
+  let html = `
+    <div class="box">
+    <img src="${y}" alt="" />
+    <div class="genre">${moviedat.genre}</div>
+   <div class="bookmark"><i class="fa-solid fa-bookmark"></i></div>
+   
+    <div class="bottom-content">
+      <div class="rating">Rating: ${moviedat.rating}</div>
+      <div class="title">${moviedat.title}</div>
+      <svg xmlns="http://www.w3.org/2000/svg" class="small-circle" width="50" height="50" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+</svg>
+    </div>
+  </div>
+    `;
+  bookmarkedContainer.innerHTML += html;
+};
