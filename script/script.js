@@ -262,7 +262,7 @@ const checkBookmark = function () {
             return obj.bookmarkedMovie === name;
           });
           currentAcc.bookmarks.splice(desiredMovie, 1);
-          console.log(currentAcc);
+
           localStorage.setItem("loggedAcc", JSON.stringify(currentAcc));
           loadBookmarks();
           checkBookmarkStatus(bookmark);
@@ -275,15 +275,6 @@ const checkBookmark = function () {
   }
 };
 checkBookmark();
-const updateLocalSotrageBookmarks = function (bookM) {
-  let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
-  let currentAccs = JSON.parse(localStorage.getItem("Accounts"));
-  let accIndex = currentAccs.findIndex((acc) => {
-    return acc.user === currentAcc.user;
-  });
-  currentAccs[accIndex].bookmarks.push(bookM);
-  localStorage.setItem("Accounts", JSON.stringify(currentAccs));
-};
 
 setTimeout(function () {
   checkBookmark();
@@ -296,13 +287,19 @@ const checkBookmarksLength = function () {
 };
 // remove
 ////////////////////
-
+setTimeout(() => {
+  console.log(
+    moviesContainer.children[0].childNodes[7].childNodes[3].innerHTML
+  );
+}, 1000);
 //del bm
 const removefromlist = function () {
   const del = document.querySelectorAll(".ed");
   let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
   del.forEach((b) => {
     b.addEventListener("click", (e) => {
+      //Find item in original movies container
+
       let nameToRemove =
         e.target.closest(".box").children[3].children[1].innerHTML;
       let index = currentAcc.bookmarks.findIndex((b) => {
@@ -313,6 +310,7 @@ const removefromlist = function () {
       loadBookmarks();
       if (bookmarkedContainer.innerHTML === "") {
         emptyBookTitle.classList.remove("hide");
+        location.reload();
       }
     });
   });

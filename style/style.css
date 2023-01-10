@@ -304,7 +304,8 @@ ul {
 }
 /* Top movies */
 .movies {
-  margin: 170px 0px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 .movies .container h1 {
   color: white;
@@ -484,6 +485,84 @@ ul {
 .show {
   transform: translateY(0px);
 }
+/* Pricing section */
+.pricing {
+  position: relative;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.pricing .container .title {
+  color: white;
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+@media (max-width: 1000px) {
+  .pricing .container .title {
+    text-align: center;
+  }
+}
+.pricing .container .boxes {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  color: white;
+}
+.pricing .container .boxes .box {
+  padding: 50px;
+  border-radius: 5px;
+  background-color: #3d3d3d;
+  margin-bottom: 100px;
+  width: 330px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: transform 0.2s ease;
+}
+.pricing .container .boxes .box:hover {
+  transform: scale(110%);
+}
+.pricing .container .boxes .box h1 {
+  text-align: center;
+}
+.pricing .container .boxes .box h2 {
+  position: relative;
+  text-align: center;
+}
+.pricing .container .boxes .box h2::before {
+  content: "/month";
+  position: absolute;
+  top: 2px;
+  right: 40px;
+  font-weight: lighter;
+  font-size: 14px;
+  color: rgb(145, 145, 145);
+}
+.pricing .container .boxes .box p {
+  position: relative;
+  padding-bottom: 15px;
+  padding-left: 22px;
+}
+.pricing .container .boxes .box p::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f00c";
+  font-weight: 900;
+  left: 0px;
+  position: absolute;
+}
+.pricing .container .box .btn {
+  text-align: center;
+  padding: 10px 14px;
+  margin-top: 70px;
+  cursor: pointer;
+  color: black;
+  font-weight: bolder;
+  border-radius: 5px;
+  background-color: #fed530;
+  transition: transform 0.2s ease;
+}
+.pricing .container .box .btn:hover {
+  transform: scale(110%);
+}
+
 /* Footer */
 .footer {
   display: flex;
@@ -505,8 +584,10 @@ ul {
 @media (max-width: 1000px) {
   .footer .left-side {
     flex: 1;
+    margin: 0;
     width: 100%;
-    padding: 20px 0px 50px 50px;
+    text-align: center;
+    padding-left: 0px;
   }
 }
 .footer .left-side h1 {
@@ -532,6 +613,11 @@ ul {
   position: relative;
   display: flex;
 }
+@media (max-width: 1000px) {
+  .footer .left-side .emailbox {
+    margin-left: 13%;
+  }
+}
 .footer .left-side .emailbox input {
   width: 100%;
   padding: 15px 10px 15px 8px;
@@ -540,6 +626,15 @@ ul {
   border-radius: 7px;
   border: none;
   outline: none;
+}
+@media (max-width: 1000px) {
+  .footer .left-side .emailbox input {
+    width: 100%;
+    margin-left: 20px;
+  }
+  .footer .left-side .emailbox .btn {
+    padding: 10px 14px;
+  }
 }
 .footer .left-side .emailbox .btn {
   position: absolute;
@@ -552,6 +647,7 @@ ul {
   border-radius: 10px;
   background-color: #fed530;
 }
+
 .footer .right-side {
   padding: 50px 110px 50px 0px;
   flex: 1;
