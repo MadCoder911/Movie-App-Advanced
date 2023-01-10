@@ -9,6 +9,8 @@ const content = document.querySelector(".content");
 const rightContent = document.querySelector(".right-content");
 const playIcon = document.querySelector(".circle");
 const nav = document.querySelector(".nav");
+const emptyBookTitle = document.querySelector(".h2");
+const bookmarkedContainer = document.querySelector(".bookmarkedBoxes");
 (function () {
   playIcon.addEventListener("mouseover", (e) => {
     rightContent.style.filter = "blur(3px)";
@@ -113,12 +115,15 @@ const topMovies = async function (url) {
   const data = await res.json();
 
   data.results.forEach((data) => {
+    checkIfBookmarked(data);
     let html = `
     <div class="box">
     
     <img src="${IMG_PATH + data.poster_path}" alt="" />
     <div class="genre">${checkGenre(data.genre_ids[0])}</div>
-   <div class="bookmarkinitial bii"><i class="fa-regular fa-bookmark"></i></div>
+   <div class="bookmarkinitial bii"><i class="${checkIfBookmarked(
+     data
+   )} fa-bookmark"></i></div>
    
     <div class="bottom-content">
       <div class="rating">Rating: ${data.vote_average}</div>
@@ -136,6 +141,25 @@ const topMovies = async function (url) {
 };
 topMovies(API_URL);
 //
+const checkIfBookmarked = function (x) {
+  let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
+  if (!currentAcc) return "fa-regular";
+  let bookmarksArr = currentAcc.bookmarks;
+
+  if (bookmarksArr.length === 0 || !currentAcc) return "fa-regular";
+  const desiredMovie = bookmarksArr.findIndex((obj) => {
+    return obj.bookmarkedMovie === x.title;
+  });
+
+  return desiredMovie === -1 ? "fa-regular" : "fa-solid";
+};
+
+// console.log(bookmarksArr[0].bookmarkedMovie === x.title);
+
+// // return bookmarksArr.map((b) =>
+// //   b.bookmarkedMovie === x.title ? "fa-solid" : "fa-regular"
+// // );
+
 const search = document.querySelector(".searchfield");
 const searchBtn = document.querySelector(".searchBtn");
 
@@ -147,6 +171,9 @@ searchBtn.addEventListener("click", (e) => {
     moviesContainer.innerHTML = "";
     topMovies(SEARCH_API + searchTerm);
     search.value = "";
+    setTimeout(() => {
+      checkBookmark();
+    }, 2000);
   } else {
     window.location.reload();
   }
@@ -192,23 +219,24 @@ const checkBookmarkStatus = function (bookmark) {
     bookmark.firstChild.classList.add("fa-regular");
   }
 };
-setTimeout(function () {
+
+const checkBookmark = function () {
   const bookmarkIcon = document.querySelectorAll(".bii");
   const err = document.querySelector(".err");
-  const checkBookmark = function () {
-    if (loginstatus === "false" || !loginstatus) {
-      bookmarkIcon.forEach((bookmark) => {
-        bookmark.addEventListener("click", (e) => {
-          err.classList.add("show");
-          setTimeout(function () {
-            err.classList.remove("show");
-          }, 3000);
-        });
+  if (loginstatus === "false" || !loginstatus) {
+    bookmarkIcon.forEach((bookmark) => {
+      bookmark.addEventListener("click", (e) => {
+        err.classList.add("show");
+        setTimeout(function () {
+          err.classList.remove("show");
+        }, 3000);
       });
-    } else if (loginstatus === "true") {
-      bookmarkIcon.forEach((bookmark) => {
-        bookmark.addEventListener("click", (e) => {
-          checkBookmarkStatus(bookmark);
+    });
+  } else if (loginstatus === "true") {
+    let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
+    bookmarkIcon.forEach((bookmark) => {
+      bookmark.addEventListener("click", (e) => {
+        if (bookmark.firstChild.classList.contains("fa-regular")) {
           let box = e.target.closest(".box");
           let imgg = box.children[0].src;
           let genre = box.children[1].innerHTML;
@@ -221,19 +249,45 @@ setTimeout(function () {
             title: name,
             image: imgg,
           };
-          let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
+          //
           currentAcc.bookmarks.push(movieData);
           localStorage.setItem("loggedAcc", JSON.stringify(currentAcc));
           loadBookmarks();
           checkBookmarksLength();
-        });
+          checkBookmarkStatus(bookmark);
+        } else if (bookmark.firstChild.classList.contains("fa-solid")) {
+          let box = e.target.closest(".box");
+          let name = box.children[3].children[1].innerHTML;
+          const desiredMovie = currentAcc.bookmarks.findIndex((obj) => {
+            return obj.bookmarkedMovie === name;
+          });
+          currentAcc.bookmarks.splice(desiredMovie, 1);
+          console.log(currentAcc);
+          localStorage.setItem("loggedAcc", JSON.stringify(currentAcc));
+          loadBookmarks();
+          checkBookmarkStatus(bookmark);
+          if (bookmarkedContainer.innerHTML === "") {
+            emptyBookTitle.classList.remove("hide");
+          }
+        }
       });
-    }
-  };
+    });
+  }
+};
+checkBookmark();
+const updateLocalSotrageBookmarks = function (bookM) {
+  let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
+  let currentAccs = JSON.parse(localStorage.getItem("Accounts"));
+  let accIndex = currentAccs.findIndex((acc) => {
+    return acc.user === currentAcc.user;
+  });
+  currentAccs[accIndex].bookmarks.push(bookM);
+  localStorage.setItem("Accounts", JSON.stringify(currentAccs));
+};
+
+setTimeout(function () {
   checkBookmark();
 }, 1000);
-const emptyBookTitle = document.querySelector(".h2");
-const bookmarkedContainer = document.querySelector(".bookmarkedBoxes");
 
 const checkBookmarksLength = function () {
   if (bookmarkedContainer.children.length > 0) {
@@ -242,22 +296,32 @@ const checkBookmarksLength = function () {
 };
 // remove
 ////////////////////
-const removeBookmark = function (bookmark) {
-  bookmark.forEach((b) => {
-    b.addEventListener("click", () => {
-      let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
-      let moviename = b.children[3].children[1].innerHTML;
-      let index = currentAcc.bookmark.findIndex();
-      console.log(index);
+
+//del bm
+const removefromlist = function () {
+  const del = document.querySelectorAll(".ed");
+  let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
+  del.forEach((b) => {
+    b.addEventListener("click", (e) => {
+      let nameToRemove =
+        e.target.closest(".box").children[3].children[1].innerHTML;
+      let index = currentAcc.bookmarks.findIndex((b) => {
+        return b.bookmarkedMovie === nameToRemove;
+      });
+      currentAcc.bookmarks.splice(index, 1);
+      localStorage.setItem("loggedAcc", JSON.stringify(currentAcc));
+      loadBookmarks();
+      if (bookmarkedContainer.innerHTML === "") {
+        emptyBookTitle.classList.remove("hide");
+      }
     });
   });
 };
-
-//load
+// load;
 const loadBookmarks = function () {
   bookmarkedContainer.innerHTML = "";
   let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
-  console.log(currentAcc.bookmarks);
+
   currentAcc.bookmarks.forEach((bm) => {
     let html = `
     <div class="box bookmarked">
@@ -265,7 +329,7 @@ const loadBookmarks = function () {
     <div class="genre">${bm.genre}</div>
    <div class="bookmarkinitial ed"><i class="fa-solid fa-bookmark"></i></div>
     <div class="bottom-content">
-      <div class="rating">Rating: ${bm.rating}</div>
+      <div class="rating">${bm.rating}</div>
       <div class="title">${bm.title}</div>
       <svg xmlns="http://www.w3.org/2000/svg" class="small-circle" width="50" height="50" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -275,9 +339,10 @@ const loadBookmarks = function () {
   </div>
     `;
     bookmarkedContainer.innerHTML += html;
+    removefromlist();
   });
+
   const bookmarkeddd = document.querySelectorAll(".bookmarked");
-  removeBookmark(bookmarkeddd);
 };
 loadBookmarks();
 checkBookmarksLength();
