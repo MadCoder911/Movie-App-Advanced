@@ -83,14 +83,15 @@ ul {
   background-size: cover !important;
   background-position: center !important;
   background-attachment: fixed !important;
+  background-repeat: no-repeat;
   z-index: 0;
-  filter: blur(0px);
 }
 @media (max-width: 1000px) {
   .landing {
     background-size: cover !important;
     background-position: center !important;
     background-attachment: fixed !important;
+    background-repeat: no-repeat;
   }
 }
 .landing::before {
@@ -113,6 +114,7 @@ ul {
 }
 @media (max-width: 1000px) {
   .landing::before {
+    background-repeat: no-repeat;
     background-position: center;
   }
 }
@@ -522,6 +524,7 @@ ul {
 }
 .pricing .container .boxes .box h1 {
   text-align: center;
+  font-size: 43px;
 }
 .pricing .container .boxes .box h2 {
   position: relative;

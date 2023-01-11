@@ -11,20 +11,9 @@ const playIcon = document.querySelector(".circle");
 const nav = document.querySelector(".nav");
 const emptyBookTitle = document.querySelector(".h2");
 const bookmarkedContainer = document.querySelector(".bookmarkedBoxes");
-(function () {
-  playIcon.addEventListener("mouseover", (e) => {
-    rightContent.style.filter = "blur(3px)";
-    nav.style.filter = "blur(3px)";
-  });
-  playIcon.addEventListener("mouseout", (e) => {
-    rightContent.style.filter = "blur(0px)";
-    nav.style.filter = "blur(0px)";
-  });
-});
 
-export let widthWin = window.innerWidth;
-
-export let randommovie = Math.trunc(Math.random() * 20);
+let widthWin = window.innerWidth;
+let randommovie = Math.trunc(Math.random() * 20);
 
 const getMovies = async function (url) {
   const res = await fetch(url);
