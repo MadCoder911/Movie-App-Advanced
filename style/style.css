@@ -92,6 +92,7 @@ ul {
     background-position: center !important;
     background-attachment: scroll;
     background-repeat: no-repeat;
+    -webkit-touch-callout: inherit;
   }
 }
 .landing::before {
