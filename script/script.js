@@ -5,20 +5,17 @@ export const landing = document.querySelector(".landing");
 const landingTitle = document.querySelector(".landingtitle");
 const landingP = document.querySelector(".landingP");
 const ratings = document.querySelector(".ratings");
-const content = document.querySelector(".content");
-const rightContent = document.querySelector(".right-content");
-const playIcon = document.querySelector(".circle");
-const nav = document.querySelector(".nav");
 const emptyBookTitle = document.querySelector(".h2");
 const bookmarkedContainer = document.querySelector(".bookmarkedBoxes");
-
+const search = document.querySelector(".searchfield");
+const searchBtn = document.querySelector(".searchBtn");
 let widthWin = window.innerWidth;
 let randommovie = Math.trunc(Math.random() * 20);
 
+// Landing image
 const getMovies = async function (url) {
   const res = await fetch(url);
   const data = await res.json();
-  // Landing image
   if (widthWin <= 700) {
     landing.style.backgroundImage = `url('${
       IMG_PATH + data.results[randommovie].poster_path
@@ -143,15 +140,6 @@ const checkIfBookmarked = function (x) {
   return desiredMovie === -1 ? "fa-regular" : "fa-solid";
 };
 
-// console.log(bookmarksArr[0].bookmarkedMovie === x.title);
-
-// // return bookmarksArr.map((b) =>
-// //   b.bookmarkedMovie === x.title ? "fa-solid" : "fa-regular"
-// // );
-
-const search = document.querySelector(".searchfield");
-const searchBtn = document.querySelector(".searchBtn");
-
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const searchTerm = search.value;
@@ -186,7 +174,7 @@ const checkUser = function () {
   }
 };
 checkUser();
-
+//Profile page
 const profilePage = function () {
   loginName.addEventListener("click", () => {
     if (loginstatus === "false" || !loginstatus) {
@@ -197,8 +185,8 @@ const profilePage = function () {
   });
 };
 profilePage();
+////////////////////////////
 // Bookmarking
-
 const checkBookmarkStatus = function (bookmark) {
   if (bookmark.firstChild.classList.contains("fa-regular")) {
     bookmark.firstChild.classList.add("fa-solid");
@@ -208,7 +196,7 @@ const checkBookmarkStatus = function (bookmark) {
     bookmark.firstChild.classList.add("fa-regular");
   }
 };
-
+// Add bookmarks
 const checkBookmark = function () {
   const bookmarkIcon = document.querySelectorAll(".bii");
   const err = document.querySelector(".err");
@@ -274,14 +262,9 @@ const checkBookmarksLength = function () {
     emptyBookTitle.classList.add("hide");
   }
 };
-// remove
+
 ////////////////////
-setTimeout(() => {
-  console.log(
-    moviesContainer.children[0].childNodes[7].childNodes[3].innerHTML
-  );
-}, 1000);
-//del bm
+//del bookmarks from the bookmarks section
 const removefromlist = function () {
   const del = document.querySelectorAll(".ed");
   let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
@@ -304,7 +287,7 @@ const removefromlist = function () {
     });
   });
 };
-// load;
+// load bookmarks;
 const loadBookmarks = function () {
   bookmarkedContainer.innerHTML = "";
   let currentAcc = JSON.parse(localStorage.getItem("loggedAcc"));
@@ -328,8 +311,6 @@ const loadBookmarks = function () {
     bookmarkedContainer.innerHTML += html;
     removefromlist();
   });
-
-  const bookmarkeddd = document.querySelectorAll(".bookmarked");
 };
 loadBookmarks();
 checkBookmarksLength();

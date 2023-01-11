@@ -51,7 +51,7 @@ usernameInput.addEventListener("click", function () {
 passwordInput.addEventListener("click", function () {
   passwordLabel.classList.add("active");
 });
-
+//Background image
 let widthWin = window.innerWidth;
 
 let randommovie = Math.trunc(Math.random() * 20);
@@ -78,6 +78,8 @@ window.onload = () => {
     accounts.push(d);
   });
 };
+////////////////
+//Logging in
 loginBtn.addEventListener("click", function () {
   let username = usernameInput.value;
   let password = passwordInput.value;
@@ -100,8 +102,8 @@ loginBtn.addEventListener("click", function () {
     }, 4000);
   }
 });
+////////////////////
 /* Registeration */
-
 registerBtn.addEventListener("click", () => {
   paragraph.innerHTML = `Existing user? <span class="loginn">Login</span>`;
   topParagraph.innerHTML = `Please Register`;
