@@ -93,6 +93,17 @@ ul {
     background-attachment: scroll;
     background-repeat: no-repeat;
     -webkit-touch-callout: inherit;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background: url("../imgs/Shadow.svg") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
 }
 .landing::before {
