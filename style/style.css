@@ -90,7 +90,7 @@ ul {
   .landing {
     background-size: cover !important;
     background-position: center !important;
-    background-attachment: fixed !important;
+    background-attachment: scroll;
     background-repeat: no-repeat;
   }
 }
